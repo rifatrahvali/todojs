@@ -1,3 +1,19 @@
 .fw-400{
     font-weight: 400 !important;
 }
+
+.task-list-item{
+    background-color:honeydew;
+    border-bottom: 1px solid #fff;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.task-list{
+    --bs-list-group-item-padding-y:unset;
+}
+/* .trashed{
+    line-height: 60px;
+    margin-right:10px;
+} */
