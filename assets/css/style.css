@@ -17,3 +17,32 @@
     line-height: 60px;
     margin-right:10px;
 } */
+
+/* bootstrap ile müdahale edemezsek bu şekilde yapıyoruz */
+/* max width'i 320 px'e kadar olan ekranları yazacağız ornek iphone4 */
+/* @media screen and (max-width:320px) {
+    .col-8,.col-6, .col-4, .col-3{
+        width:100%;
+        margin-top: 10px;
+    }
+    .btnAddTaskList{
+        margin-top: 10px;
+    }
+} */
+
+/* max width'i 320 px'e kadar olan ekranları yazacağız ornek iphone4 */
+/* @media screen and (max-width:768px) {
+    .col-8,.col-6, .col-4, .col-3{
+        width:100%;
+        margin-top: 10px;
+    }
+    .btnAddTaskList{
+        margin-top: 10px;
+    }
+} */
+/* max width'i 320 px'e kadar olan ekranları yazacağız ornek iphone4 */
+/* @media screen and (max-width:1180px) {
+    .footer{
+        margin-bottom: 0px;
+    }
+} */
