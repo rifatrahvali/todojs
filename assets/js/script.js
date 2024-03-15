@@ -1,19 +1,13 @@
 // Sayfa yüklendiğinde çalışacağını belirtir.
 addEventListener("DOMContentLoaded",function (sayfaYuklendi) {
-
     // görev oluştur kartındaki input ve butona id verildi.
     let btnAddTaskList = document.getElementById("btnAddTaskList");
-    //let btnAddTaskListe = $("btnAddTaskListe");
     let inputNewTaskName = document.getElementById("inputNewTaskName");
     let taskListUl = document.getElementById("taskListUl");
-    // görev oluştur butonuna tıklandığında listener ile işlem yap
-
-    btnAddTaskList.addEventListener("click",function (event) {
-        //console.log("tiklandi");
-        // butona tıklandığında görev listesi kartında bulunan ul içerisine li oluşturacağız.
-        createLiElement(); 
-    });
-
+    let btnGorevTamamlandi = document.getElementById("btnGorevTamamlandi");
+    let btnGorevCikar = document.getElementById("btnGorevCikar");
+    let btnGorevTumunuSec = document.getElementById("btnGorevTumunuSec");
+    
     // görev listesinde bulunan ul içerisinde li oluşturacağız ancak
     // bu li'lerin id'leri benzersiz olmalı ayrıştırıp sorgulama yapabilelim.
     // vt'de arama yapabiliriz
@@ -21,6 +15,52 @@ addEventListener("DOMContentLoaded",function (sayfaYuklendi) {
 
     // tamamlanmış görevlerin ul içerisindeki li'lerin benzersiz id'si için array
     let complatedTaskList = []
+
+    // Seçilen görev listesi
+    let selectedList = []
+
+    btnGorevTumunuSec.addEventListener("click",function (event) {
+        
+        taskList.forEach(function(value,index,array){
+            // görev kartındaki tıkladığımız dinamik isimli input id'yi değişkene atadık
+            let selectInput = document.getElementById("input-"+value);
+            // input seçili mi? seçili ise silelim
+            if (selectInput.hasAttribute("checked")) {
+                selectInput.removeAttribute("checked");
+                selectInput.checked=false;
+
+            }else{ 
+                selectInput.setAttribute("checked","checked");
+                // seçili checkbox yok ise seçili listeye ekle
+                // (tümünü seçe bastığımızda seçilenler listesi oluşacak)
+                selectedList.push(value);
+                selectInput.checked=true;
+
+
+                // diziden kaldırmak için
+                
+                // tümünü seçe basmadan önce tıklanmış olan checkbox'un indexi
+                let removeItemIndex = selectedList.indexOf(value);
+                if (removeItemIndex !== -1 ) {
+                    selectedList.splice(removeItemIndex,1);
+                }
+            }
+
+        });
+    });
+
+
+
+    // görev oluştur butonuna tıklandığında listener ile işlem yap
+    btnAddTaskList.addEventListener("click",function (event) {
+        // butona tıklandığında görev listesi kartında bulunan ul içerisine li oluşturacağız.
+        if (inputNewTaskName.value==null || inputNewTaskName.value=="") {
+            alert("Görev ekleme girdisi boş bırakılmış")
+        }else{
+            createLiElement(); 
+        }
+    });
+
 
 
     // butona tıklandığında görev listesi kartında bulunan ul içerisine li oluşturacağız.
