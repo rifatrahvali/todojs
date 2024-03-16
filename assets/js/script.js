@@ -7,7 +7,12 @@ addEventListener("DOMContentLoaded",function (sayfaYuklendi) {
     let btnGorevTamamlandi = document.getElementById("btnGorevTamamlandi");
     let btnGorevCikar = document.getElementById("btnGorevCikar");
     let btnGorevTumunuSec = document.getElementById("btnGorevTumunuSec");
+
     
+    //seçilen görev - checkbox 
+    let secilenGorev = document.getElementById("selectTask"); 
+    
+    let secilenGorevler = document.querySelectorAll(".select-task");
     // görev listesinde bulunan ul içerisinde li oluşturacağız ancak
     // bu li'lerin id'leri benzersiz olmalı ayrıştırıp sorgulama yapabilelim.
     // vt'de arama yapabiliriz
@@ -19,13 +24,20 @@ addEventListener("DOMContentLoaded",function (sayfaYuklendi) {
     // Seçilen görev listesi
     let selectedList = []
 
+
+    // seçilen görev
+    secilenGorev.addEventListener("change",function (event) {
+        console.log("secilen görev checkbox");    
+    });
+
+
     btnGorevTumunuSec.addEventListener("click",function (event) {
         
         taskList.forEach(function(value,index,array){
             // görev kartındaki tıkladığımız dinamik isimli input id'yi değişkene atadık
             let selectInput = document.getElementById("input-"+value);
             // input seçili mi? seçili ise silelim
-            if (selectInput.hasAttribute("checked")) {
+            if (selectInput.hasAttribute("checked")){
                 selectInput.removeAttribute("checked");
                 selectInput.checked=false;
 
@@ -49,7 +61,25 @@ addEventListener("DOMContentLoaded",function (sayfaYuklendi) {
         });
     });
 
-
+    // görevler kartında ulde bulunan seçili li elementini çıkartma
+    btnGorevCikar.addEventListener("click",function (event) {
+        // console.log("gorev cıkar butonu");
+        taskList.forEach(function(value,index,array){
+            let secilenInput = document.getElementById("input-"+value);
+            console.log(secilenInput.id);
+            if (secilenInput.checked) {
+                // seçili inputun li'sini sileceğiz
+                let kapsayiciLiElement = document.getElementById("wrapper-li-"+value);
+                kapsayiciLiElement.remove();
+                // tümünü seçe basmadan önce tıklanmış olan checkbox'un indexi
+                let removeItemIndex = taskList.indexOf(value);
+                if (removeItemIndex !== -1 ) {
+                    taskList.splice(removeItemIndex,1);
+                }
+                
+            }
+        });
+    });
 
     // görev oluştur butonuna tıklandığında listener ile işlem yap
     btnAddTaskList.addEventListener("click",function (event) {
@@ -60,8 +90,6 @@ addEventListener("DOMContentLoaded",function (sayfaYuklendi) {
             createLiElement(); 
         }
     });
-
-
 
     // butona tıklandığında görev listesi kartında bulunan ul içerisine li oluşturacağız.
     function createLiElement() {
@@ -77,7 +105,7 @@ addEventListener("DOMContentLoaded",function (sayfaYuklendi) {
 
         let inputElement = document.createElement("input");
         inputElement.type="checkbox";
-        inputElement.className = "select-task me-3";
+        inputElement.className = "select-task me-3 select-task";
         inputElement.id = "input-"+inputID;
 
         let labelElement = document.createElement("label");
